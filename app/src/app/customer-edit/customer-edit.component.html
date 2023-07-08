@@ -1,0 +1,31 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+        <li class="breadcrumb-item"><a routerLink="/customers">Customers</a></li>
+        <li class="breadcrumb-item active">Edit Customer</li>
+    </ol>
+</nav>
+
+<h2>Customer Information</h2>
+<div *ngIf="feedback.message" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
+<form *ngIf="customer" #editForm="ngForm" (ngSubmit)="save()">
+    <mat-form-field class="full-width" *ngIf="customer.id">
+        <mat-label>ID</mat-label>
+        <input matInput [(ngModel)]="customer.id" id="id" name="id" placeholder="ID" readonly>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="customer.firstName" id="firstName" name="firstName" placeholder="First Name"
+            required>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="customer.lastName" id="lastName" name="lastName" placeholder="Last Name" required>
+    </mat-form-field>
+
+    <div class="button-row" role="customer">
+        <button type="submit" mat-raised-button color="primary" [disabled]="!editForm.form.valid"
+            id="save">Save</button>
+        <button type="button" mat-button color="accent" (click)="cancel()" id="cancel">Cancel</button>
+    </div>
+</form>
